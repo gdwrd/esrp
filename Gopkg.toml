@@ -1,0 +1,4 @@
+required = [
+  "github.com/spacemonkeygo/openssl", 
+  "golang.org/x/crypto/pbkdf2"
+]
