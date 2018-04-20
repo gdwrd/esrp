@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/spacemonkeygo/openssl"
   packages = [".","utils"]
-  revision = "4ea35d79e3ae2758eac37f0348cdc58aa167e78a"
+  revision = "2df7e68102b2b19c89ea8cfc2cb8126c83eb26f7"
 
 [[projects]]
   branch = "master"
@@ -17,13 +17,13 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["pbkdf2"]
-  revision = "d585fd2cc9195196078f516b69daff6744ef5e84"
+  revision = "d6449816ce06963d9d136eee5a56fca5b0616e7e"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "571f7bbbe08da2a8955aed9d4db316e78630e9a3"
+  revision = "2281fa97ef7b0c26324634d5a22f04babdac8713"
 
 [solve-meta]
   analyzer-name = "dep"

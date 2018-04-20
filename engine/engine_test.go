@@ -2,7 +2,6 @@ package engine_test
 
 import (
 	hash "crypto"
-	"fmt"
 	"testing"
 
 	c "github.com/nsheremet/esrp/crypto"
@@ -39,7 +38,7 @@ func TestEngineCalcV(t *testing.T) {
 }
 
 func TestEngineCalcA(t *testing.T) {
-	subj := instance.CalcV(value.New(vectors["v"]))
+	subj := instance.CalcA(value.New(vectors["a"]))
 
 	if subj.Hex() != vectors["A"] {
 		t.Error("hex should be equal")
@@ -65,12 +64,8 @@ func TestEngineCalcClientS(t *testing.T) {
 	u := value.New(vectors["u"])
 	x := value.New(vectors["x"])
 
-	val := instance.CalcV(x)
-	bb := instance.CalcB(value.New(vectors["b"]), val)
+	bb := instance.CalcB(value.New(vectors["b"]), instance.CalcV(x))
 	subj := instance.CalcClientS(bb, a, x, u)
-
-	fmt.Printf("%s\n", subj.Hex())
-	fmt.Printf("%s\n", vectors["S"])
 
 	if subj.Hex() != vectors["S"] {
 		t.Error("ClientS should be equal to hex")

@@ -28,22 +28,26 @@ type Value struct {
 // Response:
 // - value {Value} value with hex attribute
 func New(arg interface{}) (value Value) {
-	if v, ok := arg.(string); ok {
-		value.hex = v
-	} else if v, ok := arg.([]byte); ok {
-		value.hex = fmt.Sprintf("%x", string(v))
+	if v, ok := arg.([]byte); ok {
+		value.bytes = v
+	} else if v, ok := arg.(string); ok {
+		buff, err := hex.DecodeString(v)
+		
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		value.bytes = buff
 	} else if v, ok := arg.(*big.Int); ok {
-		value.hex = fmt.Sprintf("%x", string(v.Bytes()))
+		value.int = v
+		value.bytes = v.Bytes()
 	}
 
-	buff, err := hex.DecodeString(value.hex)
+	value.hex = fmt.Sprintf("%x", value.bytes)
 
-	if err != nil {
-		log.Fatal(err)
+	if value.int == nil {
+		value.int = new(big.Int).SetBytes([]byte(value.bytes))
 	}
-
-	value.bytes = buff
-	value.int = new(big.Int).SetBytes([]byte(value.bytes))
 
 	return value
 }
